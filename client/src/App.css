@@ -1,0 +1,322 @@
+body{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+#nav{
+    background-color: rgb(242, 110, 110);
+    padding: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(105, 6, 6);
+    font-size: 25px;
+}
+#g1{
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+}
+
+#logo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+}
+
+#search > input{
+    width: 250px;
+    height: 35px;
+    border-radius: 6px;
+    border: 2px solid rgb(223, 104, 104);
+    margin-right: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+    outline :none;
+}
+#head{
+    display: flex;
+    justify-content: space-between;
+    height:40px;
+    align-items: center;
+    padding: 20px;
+    margin-top: 25px;
+    padding-bottom: 8px;
+}
+#head > div{
+    font-size: 25px;
+    font-weight: 600;
+}
+#head1{
+    width:90%;
+    margin: auto;
+}
+hr{
+    color:rgb(213, 208, 208);
+}
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding-left: 58px;
+    padding-right: 58px;
+}
+.account-card{
+    margin: 20px;
+    width: 250px;
+    height: 130px;
+    border: solid 1.5px rgb(213, 210, 210);
+    border-radius: 12px;
+    padding: 18px;
+    transition: all 0.2s;
+    position: relative;
+    font-size: 18px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+#g2{
+    display: flex;
+    align-items: center;
+}
+#g2>div{
+    margin-right: 12px;
+}
+.account-card>div{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight:400;
+}
+.account-card:hover{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+}
+.account-card > b{
+    margin-bottom: 30px;
+    color:rgb(102, 12, 12)
+}
+.close{
+    color:red;
+    transition: all 0.2s;
+}
+.close:hover{
+    scale:1.1;
+}
+
+#btn-grp{
+    display: flex;
+    justify-content: space-between;
+    width:170px;
+    position: absolute;
+    bottom: 12px
+}
+/* .blur{
+    filter: blur(4px);
+} */
+
+
+.modal-container{
+    border-radius: 10px;
+    border:1px solid rgb(203, 200, 200);
+    display: flex;
+    flex-direction: column;
+    z-index: 2000;
+    position: fixed;
+    left: 30%;
+    top: 25%;
+    width: 40%; 
+    height: 50%; 
+    background-color: rgb(232, 232, 232);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.delete-container{
+    border-radius: 10px;
+    border:1px solid rgb(203, 200, 200);
+    display: flex;
+    flex-direction: column;
+    z-index: 2000;
+    position: fixed;
+    left: 30%;
+    top: 35%;
+    width: 40%; 
+    height: 30%; 
+    background-color: rgb(232, 232, 232);
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 15px; 
+    padding-bottom: 8px;
+}
+.inps{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height:100%;
+    margin: auto;
+    width: 80%;
+}
+.inp1{
+    border-radius: 8px;
+    width: 100%;
+    border: 1px solid rgb(227, 226, 226);
+    background-color: rgba(255, 255, 255, 0.836);
+}
+button:hover{
+    opacity: 0.9;
+}
+#pwd{
+    display: flex;
+}
+#password{
+    display: flex;
+    align-items: center;
+    color:rgb(146, 53, 6);
+}
+#pwd>button{
+    background-color: rgb(218, 182, 251);
+    color:rgb(46, 3, 81);
+    font-weight: 500;
+    margin-left: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 140px;
+}
+#cancel{
+    background-color: rgb(245, 217, 179);
+    color:crimson;
+    border:2px solid crimson;
+}
+.modal-container>button{
+    width: 80%;
+    margin: auto;
+    height: 70px;
+    border-radius: 8px;
+    border:none;
+    color:whitesmoke;
+    font-weight: 600;
+    background-color: crimson;
+    margin-bottom: 14px;
+}
+.btns{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btns>button{
+    width: 80%;
+    height: 60px;
+    border-radius: 8px;
+    border:none;
+    color:whitesmoke;
+    font-weight: 600;
+    background-color: crimson;
+    margin-bottom: 14px;
+}
+.head2{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 30px 10px 30px;
+}
+.modal-container>hr,.delete-container>hr{
+    width: 100%;
+    color:rgb(255, 255, 255);
+}
+
+
+/* login */
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height:100vh;
+}
+.main-container {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    border-radius: 10px;
+    width: 32vw;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+  
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 4rem;
+    margin-bottom: 10px;
+    font-weight: bolder;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .result-container,
+  .history-item {
+    flex-direction: row;
+    display: flex;
+    width: 400px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .history-container {
+    flex-direction: column;
+    display: flex;
+    height: 200px;
+    align-items: center;
+    flex-grow: 5;
+    justify-content: flex-start;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 260px;
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .wc-container{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    padding-top: 0rem;
+    background-image: linear-gradient( 67.6deg,  rgba(225,242,254,1) -2.8%, rgba(193,224,250,1) 44.6%, rgba(19,116,197,1) 102.4% );
+}
+.wc-container>div{
+    padding-top: 10rem;
+}
+.wc-container>div>button{
+    padding: 10px 18px;
+    background-color: #056abc;
+    color:white;
+    border: 0px;
+    font-size: 16px;
+    border-radius: 6px; 
+    width: 16rem;
+    margin-top: 8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .main-container>button{
+    padding: 10px 18px;
+    background-color: #069ed5;
+    color:white;
+    border: 0px;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+  
+  .input-box {
+    height: 48px;
+    width: 400px;
+    font-size: large;
+    border-radius: 8px;
+    border: 1px solid grey;
+    padding-left: 8px;
+  }
