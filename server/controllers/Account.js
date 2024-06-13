@@ -79,5 +79,16 @@ const deleteAccount= async (req, res) => {
     }
 };
 
+const getAccounts=async(req,res)=>{
+    const userID=req.params.userID;
+    const user=await User.findOne({_id:userID});
+    if(!user){
+        res.status(401).send("User not found");
+        return;
+    }
+    const accounts=user.accounts;
+    res.status(200).json(accounts);
+}
 
-module.exports={createAccount, editAccount, deleteAccount};
+
+module.exports={createAccount, editAccount, deleteAccount,getAccounts};
