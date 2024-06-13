@@ -20,7 +20,6 @@ function CreateModal({handleCreateToggler,setAccounts}) {
       try{
         const userid=localStorage.getItem('user-id')
         const token=localStorage.getItem('token')
-        console.log(email)
         const accounts=await axios.post(`http://localhost:3001/${userid}/new-account`,{accountName:name,accountPassword:password,accountEmail:email},{headers:{token,userid}});
         setAccounts(accounts.data);
         const notify = () => toast("Account added successfully");

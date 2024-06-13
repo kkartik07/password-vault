@@ -1,4 +1,3 @@
-const Account=require('../models/Account.js');
 const User=require('../models/User.js');
 require('dotenv').config();
 
@@ -16,7 +15,6 @@ const createAccount=async(req,res)=>{
                 return;
             }
         }
-        console.log(req.body.accountEmail)
         user.accounts.push({accountName:req.body.accountName, accountPassword:req.body.accountPassword,accountEmail:req.body.accountEmail });
         await user.save();
         res.status(201).json(user.accounts);
