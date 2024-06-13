@@ -18,7 +18,7 @@ const createUser=async(req,res)=>{
         userBody.password = hashedPwd;
         const newUser = new User(userBody);
         await newUser.save();
-        const token = jwt.sign({userId: newUser._id}, SECRET);
+        const token = jwt.sign({userId: newUser._id}, SECRET, { expiresIn: '1d' }); 
         res.json({ token ,_id:newUser._id});
     }
     catch(err){
@@ -41,7 +41,7 @@ const login=async(req, res) => {
             res.status(401).json({err:'Incorrect Email/Password'});
             return;
         }
-        const token = jwt.sign({ email: user.email, userId: user._id }, SECRET);
+        const token = jwt.sign({ email: user.email, userId: user._id }, SECRET, { expiresIn: '1d' });
         res.json({ token, _id: user._id });
     } catch (error) {
         console.error(error);
