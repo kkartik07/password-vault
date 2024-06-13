@@ -5,7 +5,6 @@ const Home = () => {
 
   const handleLogin = () => {
     navigate('/login')
-    // You'll update this function later
   }
 
   
@@ -22,8 +21,7 @@ const Home = () => {
           type="button"
           onClick={handleLogin}
           >Login</button>
-      <div>Don not have an account ? <Link to="/signup">Register</Link></div>
-
+        <div>Do not have an account ? <Link to="/signup">Register</Link></div>
           </div>
 
     </div>

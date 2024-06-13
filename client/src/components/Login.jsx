@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material"
 import axios from "axios"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from "react"
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -8,7 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //login
   const handleSubmit = async(event) => {
@@ -55,14 +55,16 @@ const Login = () => {
             </div>
             <hr/>
             <button onClick={handleSubmit}>Submit</button>
+            <div style={{marginTop:'10px'}}>Do not have an account ? <Link to="/signup">Register</Link></div>
+
             <Toaster 
                toastOptions={{
-                    style: {
+                style: {
                     padding: '12px',
                     color: '#713200',
                     background: '#fccccc'
-                    },
-              }}/>
+                },
+            }}/>
         </div>
     </div>
   )
