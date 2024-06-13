@@ -7,7 +7,7 @@ const createAccount=async(req,res)=>{
         const userID = req.params.userID;
         const user = await User.findOne({ _id:userID });
         if(!user){
-            res.status(400).send("User not found: couldn't create account for the following user")
+            res.status(400).send("User not found")
             return;
         }
         for(let i=0;i<user.accounts.length;i++){
@@ -16,9 +16,10 @@ const createAccount=async(req,res)=>{
                 return;
             }
         }
-        user.accounts.push({accountName:req.body.accountName, accountPassword:req.body.accountPassword });
+        console.log(req.body.accountEmail)
+        user.accounts.push({accountName:req.body.accountName, accountPassword:req.body.accountPassword,accountEmail:req.body.accountEmail });
         await user.save();
-        res.status(201).send('Password account added successfully');
+        res.status(201).json(user.accounts);
     }
     catch(err){
         console.log(err);
@@ -44,6 +45,7 @@ const editAccount = async (req, res) => {
         // Update account fields
         if (req.body.accountName !== undefined) account.accountName = req.body.accountName;
         if (req.body.accountPassword !== undefined) account.accountPassword = req.body.accountPassword;
+        if (req.body.accountEmail !== undefined) account.accountEmail = req.body.accountEmail;
 
         // Save the user document
         await user.save();

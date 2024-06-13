@@ -13,7 +13,7 @@ function AccountCard({ account }) {
     const [hiddenPassword,setHiddenPassword]=useState("");
 
     useEffect(()=>{
-        const passwordLength=account.password.length;
+        const passwordLength=account.accountPassword.length;
         let hidPassword="";
         for(let i=0;i<passwordLength;i++){
             hidPassword+='*'
@@ -32,9 +32,9 @@ function AccountCard({ account }) {
     return (
         <>
             <div className="account-card">
-                <b>{account.name}</b>
-                <div style={{marginBottom:"4px"}}>{account.email}</div>
-                <div id='g2'><div id='password'>{visible?<span style={{marginBottom:"4px"}}>{account.password}</span>:hiddenPassword}</div> <span onClick={()=>setVisible(visible=>!visible)}>{visible?<Visibility />:<VisibilityOffIcon/>}</span></div>
+                <b>{account.accountName}</b>
+                <div style={{marginBottom:"4px"}}>{account.accountEmail}</div>
+                <div id='g2'><div id='password'>{visible?<span style={{marginBottom:"4px"}}>{account.accountPassword}</span>:hiddenPassword}</div> <span onClick={()=>setVisible(visible=>!visible)}>{visible?<Visibility />:<VisibilityOffIcon/>}</span></div>
                 <div id='btn-grp'>
                     <Button variant="contained" color="primary" onClick={() => handleEditToggler(account)}>Edit</Button>
                     <Button variant="contained" color="error" onClick={handleDeleteToggler}>Delete</Button>
@@ -43,7 +43,7 @@ function AccountCard({ account }) {
             {canEdit && selectedAccount === account && (
                 <EditModal
                     handleEditToggler={handleEditToggler}
-                    details={{ name: account.name, email: account.email, password: account.password }}
+                    details={{ name: account.accountName, password: account.accountPassword, email:account.accountEmail }}
                 />
             )}
             {canDelete && <DeleteModal handleDeleteToggler={handleDeleteToggler} />}

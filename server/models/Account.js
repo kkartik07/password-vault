@@ -9,6 +9,10 @@ const accountSchema=new mongoose.Schema({
         type: String,
         required: true
     },
+    accountEmail:{
+        type:String,
+        required:true
+    }
 },{timestamps:true});
 
 const Account=mongoose.model('account',accountSchema);
