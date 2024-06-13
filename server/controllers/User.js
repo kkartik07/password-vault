@@ -33,12 +33,12 @@ const login=async(req, res) => {
         const user = await User.findOne({ email: userBody.email });
     
         if (!user) {
-            res.status(401).send('User not found or incorrect username/password');
+            res.status(401).json({err:'User not found'});
             return;
         }
         const match = await bcrypt.compare(userBody.password, user.password);
         if(!match){
-            res.status(401).send('Incorrect username/password');
+            res.status(401).json({err:'Incorrect Email/Password'});
             return;
         }
         const token = jwt.sign({ email: user.email, userId: user._id }, SECRET);

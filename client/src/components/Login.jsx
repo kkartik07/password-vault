@@ -1,14 +1,29 @@
 import { TextField } from "@mui/material"
+import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 import { useState } from "react"
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = () => {
-    alert(email)
-    alert(password)
-    // You'll update this function later...
+  const navigate = useNavigate()
+
+  //login
+  const handleSubmit = async(event) => {
+    event.preventDefault();
+    
+    try {
+        const res = await axios.post('http://localhost:3001/login', { email, password });
+        localStorage.setItem('token',res.data.token)
+        localStorage.setItem('user-id',res.data._id)
+        navigate('/home')
+    } catch (err) {
+        console.error(err); // Handle errors
+        const notify = () => toast("Incorrect Email or Password");
+        notify();
+    }
   }
 
   return (
@@ -40,6 +55,14 @@ const Login = () => {
             </div>
             <hr/>
             <button onClick={handleSubmit}>Submit</button>
+            <Toaster 
+               toastOptions={{
+                    style: {
+                    padding: '12px',
+                    color: '#713200',
+                    background: '#fccccc'
+                    },
+              }}/>
         </div>
     </div>
   )

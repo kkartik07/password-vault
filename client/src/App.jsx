@@ -3,7 +3,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Welcome from './components/Welcome'
 import Signup from './components/Signup'
-import './App.css'
+import './App.css';
 
 function App() {
 
