@@ -57,7 +57,7 @@ const Signup = () => {
             <Toaster 
                toastOptions={{
                     style: {
-                    padding: '12px',
+                    padding: '8px',
                     color: '#713200',
                     background: '#fccccc'
                 },
