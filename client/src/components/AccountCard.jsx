@@ -5,7 +5,7 @@ import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
 import { Button } from "@mui/material";
 
-function AccountCard({ account }) {
+function AccountCard({ account,setAccounts }) {
     const [canEdit, setCanEdit] = useState(false);
     const [canDelete, setCanDelete] = useState(false);
     const [selectedAccount, setSelectedAccount] = useState(null);  // Track selected account
@@ -43,7 +43,8 @@ function AccountCard({ account }) {
             {canEdit && selectedAccount === account && (
                 <EditModal
                     handleEditToggler={handleEditToggler}
-                    details={{ name: account.accountName, password: account.accountPassword, email:account.accountEmail }}
+                    details={{ name: account.accountName, password: account.accountPassword, email:account.accountEmail,acc_id:account._id }}
+                    setAccounts={setAccounts}
                 />
             )}
             {canDelete && <DeleteModal handleDeleteToggler={handleDeleteToggler} />}

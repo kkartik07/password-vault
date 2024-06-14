@@ -27,30 +27,27 @@ const createAccount=async(req,res)=>{
 const editAccount = async (req, res) => {
     try {
         const { userID, accountID } = req.params;
-        
-        // Find the user by ID
-        const user = await User.findById(userID);
-        if (!user) {
-            return res.status(404).send("User not found");
-        }
 
+        const user = await User.findOne({ _id:userID });
+        if (!user) {
+            return res.status(400).send("User not found");
+        }
+            
         // Find the account by ID within the user's accounts array
         const account = user.accounts.id(accountID);
         if (!account) {
-            return res.status(404).send("Account not found");
+            return res.status(400).send("Account not found");
         }
-
+            
         // Update account fields
         if (req.body.accountName !== undefined) account.accountName = req.body.accountName;
         if (req.body.accountPassword !== undefined) account.accountPassword = req.body.accountPassword;
         if (req.body.accountEmail !== undefined) account.accountEmail = req.body.accountEmail;
-
-        // Save the user document
+            
         await user.save();
-
-        res.status(200).send('Account updated successfully');
-    } catch (error) {
-        console.log(error);
+        res.status(200).json(user.accounts);
+    } catch (err) {
+        console.log(err);
         res.status(500).send('Error updating account');
     }
 };
@@ -73,8 +70,8 @@ const deleteAccount= async (req, res) => {
         await user.save();
 
         res.status(200).send('Account deleted successfully');
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
         res.status(500).send('Error deleting account');
     }
 };

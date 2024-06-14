@@ -11,14 +11,7 @@ import toast, { Toaster } from 'react-hot-toast';
 function Home() {
     const [canCreate, setCanCreate] = useState(false);
     const [accounts, setAccounts] = useState([
-        { accountName: "Facebook", accountPassword: "kartik123", accountEmail: 'kartik@gmail.com' },
-        { accountName: "Faceb1ook", accountPassword: "kartik123", accountEmail: 'kartik@gmail.com' },
-        { accountName: "Face2book", accountPassword: "kartik123", accountEmail: 'kartik@gmail.com' },
-        { accountName: "Facebo5ok", accountPassword: "kartik123", accountEmail: 'kartik@gmail.com' },
-        { accountName: "Fac4ook", accountPassword: "kartik123", accountEmail: 'kartik@gmail.com' },
-        { accountName: "Fac444ebook", accountPassword: "kartik123", accountEmail: 'kartik@gmail.com' },
-        { accountName: "Gmail", accountPassword: "kfdfdf3", accountEmail: 'kartdddik@gmail.com' },
-        // use shimmer ui cards instead in future !!!!!!!!!!!!!!
+        // use shimmer ui instead
     ]);
 
     const [searchQuery, setSearchQuery] = useState("");
@@ -38,11 +31,12 @@ function Home() {
                 setTimeout(()=>navigate('/login'),5000)
             }
         }
+
         getAccounts();
-    },[])
+    },[]);
+
 
     const handleSearch = (query) => {
-        console.log(query)
         setSearchQuery(query);
     };
     const handleCreateToggler = () => {
@@ -65,7 +59,7 @@ function Home() {
             </div>
             <div className="cards">
                 {filteredAccounts.map(account => (
-                    <AccountCard account={account} key={account.accountName}/>
+                    <AccountCard account={account} key={account._id} setAccounts={setAccounts}/>
                 ))}
             </div>
             {canCreate && <CreateModal handleCreateToggler={handleCreateToggler} setAccounts={setAccounts}/>}
@@ -75,7 +69,7 @@ function Home() {
                     padding: '12px',
                     color: '#713200',
                     background: '#fccccc'
-                    },
+                    }
               }}/>
         </div>
     );
