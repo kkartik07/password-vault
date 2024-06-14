@@ -47,7 +47,7 @@ function AccountCard({ account,setAccounts }) {
                     setAccounts={setAccounts}
                 />
             )}
-            {canDelete && <DeleteModal handleDeleteToggler={handleDeleteToggler} />}
+            {canDelete && <DeleteModal handleDeleteToggler={handleDeleteToggler} setAccounts={setAccounts} accountID={account._id} />}
         </>
     )
 }

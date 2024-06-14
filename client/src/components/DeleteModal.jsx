@@ -1,11 +1,25 @@
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 
-function DeleteModal({handleDeleteToggler}) {
+function DeleteModal({handleDeleteToggler,setAccounts,accountID}) {
+
   const handleClose=()=>{
     handleDeleteToggler();
   }
 
-  const handleSubmit=()=>{
-    // delete logic here
+  const handleSubmit=async()=>{
+    try{
+      const userid=localStorage.getItem('user-id')
+      const token=localStorage.getItem('token')
+      const accounts=await axios.delete(`http://localhost:3001/${userid}/delete-account/${accountID}`,{headers:{token,userid}});
+      setAccounts(accounts.data);
+      const notify = () => toast("Account deleted successfully");
+      notify()
+    }catch(err){
+      console.log(err)
+      const notify = () => toast("Session expired. Login Again");
+      notify()
+    }
     handleClose()
   }
   return (
@@ -16,6 +30,14 @@ function DeleteModal({handleDeleteToggler}) {
         <button onClick={handleClose} id='cancel'>Cancel</button>
         <button onClick={handleSubmit}>Confirm</button>
       </div>
+      <Toaster 
+          toastOptions={{
+              style: {
+              padding: '12px',
+              color: '#713200',
+              background: '#fccccc'
+              },
+        }}/>
     </div>
   )
 }

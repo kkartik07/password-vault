@@ -52,24 +52,24 @@ const editAccount = async (req, res) => {
     }
 };
 
-const deleteAccount= async (req, res) => {
+const deleteAccount=async (req, res) => {
     try {
         const { userID, accountID } = req.params;
 
         const user = await User.findById(userID);
         if (!user) {
-            return res.status(404).send("User not found");
+            return res.status(400).send("User not found");
         }
 
         const account = user.accounts.id(accountID);
         if (!account) {
-            return res.status(404).send("Account not found");
+            return res.status(400).send("Account not found");
         }
 
         user.accounts.pull(accountID);
         await user.save();
 
-        res.status(200).send('Account deleted successfully');
+        res.status(200).json(user.accounts);
     } catch (err) {
         console.log(err);
         res.status(500).send('Error deleting account');
