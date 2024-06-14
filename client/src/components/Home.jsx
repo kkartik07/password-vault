@@ -6,6 +6,7 @@ import AccountCard from "./AccountCard";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
+import { ShimmerThumbnail } from "react-shimmer-effects";
 
 
 function Home() {
@@ -13,12 +14,14 @@ function Home() {
     const [accounts, setAccounts] = useState([
         // use shimmer ui instead
     ]);
+    const [isLoading,setLoading]=useState(false);
 
     const [searchQuery, setSearchQuery] = useState("");
     const navigate = useNavigate()
 
     useEffect(()=>{
         async function getAccounts(){
+            setLoading(true);
             try {
                 const token=localStorage.getItem('token');
                 const userID=localStorage.getItem('user-id');
@@ -30,9 +33,11 @@ function Home() {
                 notify();
                 setTimeout(()=>navigate('/login'),5000)
             }
+            setLoading(false);
         }
 
-        getAccounts();
+        setTimeout(getAccounts,3000)
+        // getAccounts();
     },[]);
 
 
@@ -52,25 +57,39 @@ function Home() {
             <Navbar onSearch={handleSearch}/>
             <div id='head1'>
                 <div id='head'>
-                    <div>Passwords</div>
+                    <div>Accounts</div>
                     <Button variant="outlined" onClick={handleCreateToggler}>Create New</Button>
                 </div>
                 <hr />
             </div>
-            <div className="cards">
-                {filteredAccounts.map(account => (
-                    <AccountCard account={account} key={account._id} setAccounts={setAccounts}/>
-                ))}
-            </div>
+            {!isLoading &&
+                <div className="cards">
+                    {filteredAccounts.map(account => (
+                        <AccountCard account={account} key={account._id} setAccounts={setAccounts}/>
+                    ))}
+                </div>
+            } 
+            {isLoading && 
+                <div className="cards">
+                    <ShimmerThumbnail height={130} width={250} rounded className='account-card'/>
+                    <ShimmerThumbnail height={130} width={250} rounded className='account-card'/>
+                    <ShimmerThumbnail height={130} width={250} rounded className='account-card'/>
+                    <ShimmerThumbnail height={130} width={250} rounded className='account-card'/>
+                    <ShimmerThumbnail height={130} width={250} rounded className='account-card'/>
+                    <ShimmerThumbnail height={130} width={250} rounded className='account-card'/>
+                    <ShimmerThumbnail height={130} width={250} rounded className='account-card'/>
+                    
+                </div>
+            }
             {canCreate && <CreateModal handleCreateToggler={handleCreateToggler} setAccounts={setAccounts}/>}
             <Toaster 
-               toastOptions={{
-                    style: {
-                    padding: '8px',
-                    color: '#713200',
-                    background: '#fccccc'
-                    }
-              }}/>
+        toastOptions={{
+            style: {
+                padding: '8px',
+            color: '#713200',
+        background: '#fccccc'
+    }
+}}/>
         </div>
     );
 }
