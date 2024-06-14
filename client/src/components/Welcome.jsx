@@ -10,8 +10,8 @@ const Home = () => {
   
   return (
     <div className="wc-container">
-        <div>
-
+      <div>
+      <img src={'/bg.png'} width={400} style={{marginTop:'-40px'}}/>
       <div className='title-container'>
         <div>Welcome.</div>
       </div>

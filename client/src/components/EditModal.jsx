@@ -3,6 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
+import { generateRandomPassword } from "../utils/password-generate";
 
 
 function EditModal({handleEditToggler,details,setAccounts}) {
@@ -12,6 +13,11 @@ function EditModal({handleEditToggler,details,setAccounts}) {
 
     const handleClose=()=>{
       handleEditToggler()
+    }
+
+    const autoGeneratePassword=()=>{
+      const autoPassword=generateRandomPassword(12);
+      setPassword(autoPassword);
     }
 
     const handleSubmit=async()=>{
@@ -27,7 +33,7 @@ function EditModal({handleEditToggler,details,setAccounts}) {
           const notify = () => toast("Session expired. Login Again");
           notify()
           }
-        handleClose()
+        handleClose();
       }
 
   return (
@@ -37,7 +43,10 @@ function EditModal({handleEditToggler,details,setAccounts}) {
       <div className="inps">
       <TextField className="inp1" label="Name" variant="outlined" value={name} defaultValue={name} onChange={e=>setName(e.target.value)} />
       <TextField className="inp1" label="Email" variant="outlined" value={email} defaultValue={email} onChange={e=>setEmail(e.target.value)} />
-      <TextField className="inp1" label="Password" variant="outlined" value={password} defaultValue={password} onChange={e=>setPassword(e.target.value)} />
+      <div id='pwd'>
+        <TextField className="inp1" label="Password" variant="outlined" value={password} defaultValue={password} onChange={e=>setPassword(e.target.value)} />
+        <button onClick={autoGeneratePassword}>Auto Generate</button>
+      </div>
       </div>
       <button onClick={handleSubmit}>Submit</button>
       <Toaster 
