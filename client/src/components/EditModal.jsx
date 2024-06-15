@@ -24,7 +24,7 @@ function EditModal({handleEditToggler,details,setAccounts}) {
       try{
         const userid=localStorage.getItem('user-id')
         const token=localStorage.getItem('token')
-        const accounts=await axios.put(`http://localhost:3001/${userid}/edit-account/${details.acc_id}`,{accountName:name,accountPassword:password,accountEmail:email},{headers:{token,userid}});
+        const accounts=await axios.put(`https://password-vault-backend.onrender.com/${userid}/edit-account/${details.acc_id}`,{accountName:name,accountPassword:password,accountEmail:email},{headers:{token,userid}});
         setAccounts(accounts.data);
         const notify = () => toast("Account edited successfully");
         notify()

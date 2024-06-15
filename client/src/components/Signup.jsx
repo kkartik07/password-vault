@@ -14,7 +14,7 @@ const Signup = () => {
     event.preventDefault();
     
     try {
-        const res = await axios.post('http://localhost:3001/signup', { email, password });
+        const res = await axios.post('https://password-vault-backend.onrender.com/signup', { email, password });
         localStorage.setItem('token',res.data.token)
         localStorage.setItem('user-id',res.data._id)
         navigate('/home')

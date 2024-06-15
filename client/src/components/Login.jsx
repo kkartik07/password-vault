@@ -15,7 +15,7 @@ const Login = () => {
     event.preventDefault();
     
     try {
-        const res = await axios.post('http://localhost:3001/login', { email, password });
+        const res = await axios.post('https://password-vault-backend.onrender.com/login', { email, password });
         localStorage.setItem('token',res.data.token)
         localStorage.setItem('user-id',res.data._id)
         navigate('/home')

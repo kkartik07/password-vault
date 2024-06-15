@@ -11,7 +11,7 @@ function DeleteModal({handleDeleteToggler,setAccounts,accountID}) {
     try{
       const userid=localStorage.getItem('user-id')
       const token=localStorage.getItem('token')
-      const accounts=await axios.delete(`http://localhost:3001/${userid}/delete-account/${accountID}`,{headers:{token,userid}});
+      const accounts=await axios.delete(`https://password-vault-backend.onrender.com/${userid}/delete-account/${accountID}`,{headers:{token,userid}});
       setAccounts(accounts.data);
       const notify = () => toast("Account deleted successfully");
       notify()

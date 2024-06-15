@@ -25,7 +25,7 @@ function Home() {
             try {
                 const token=localStorage.getItem('token');
                 const userID=localStorage.getItem('user-id');
-                const res = await axios.get(`http://localhost:3001/${userID}/accounts`,{headers:{token,userID}});
+                const res = await axios.get(`https://password-vault-backend.onrender.com/${userID}/accounts`,{headers:{token,userID}});
                 setAccounts(res.data);
             } catch (err) {
                 console.error(err); // Handle errors
