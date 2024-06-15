@@ -36,8 +36,7 @@ function Home() {
             setLoading(false);
         }
 
-        setTimeout(getAccounts,3000)
-        // getAccounts();
+        getAccounts();
     },[]);
 
 
