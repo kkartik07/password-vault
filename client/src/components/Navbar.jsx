@@ -1,11 +1,20 @@
 import { Button } from "@mui/material";
 import ShieldIcon from '@mui/icons-material/Shield';
+import { useNavigate } from 'react-router-dom'
 
 function Navbar({onSearch}) {
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     onSearch(event.target.value);
   };
+
+  const handleLogout=()=>{
+    localStorage.removeItem('user-id')
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
 
   return (
     <div id='nav'>
@@ -17,7 +26,7 @@ function Navbar({onSearch}) {
           onChange={handleInputChange}
         />
       </div>
-      <Button variant="contained" color="error">
+      <Button variant="contained" color="error" onClick={handleLogout}>
         Log out
       </Button>
       </div>

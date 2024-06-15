@@ -1,14 +1,28 @@
 import { TextField } from "@mui/material"
 import { useState } from "react"
+import axios from "axios"
+import { useNavigate } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
 
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = () => {
-    alert(email)
-    alert(password)
-    // You'll update this function later...
+  const navigate = useNavigate()
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    try {
+        const res = await axios.post('https://password-vault-backend.onrender.com/signup', { email, password });
+        localStorage.setItem('token',res.data.token)
+        localStorage.setItem('user-id',res.data._id)
+        navigate('/home')
+    } catch (err) {
+        console.error(err); // Handle errors
+        const notify = () => toast("Try again");
+        notify();
+    }
   }
 
   return (
@@ -40,6 +54,14 @@ const Signup = () => {
             </div>
             <hr/>
             <button onClick={handleSubmit}>Submit</button>
+            <Toaster 
+               toastOptions={{
+                    style: {
+                    padding: '8px',
+                    color: '#713200',
+                    background: '#fccccc'
+                },
+            }}/>
         </div>
     </div>
   )

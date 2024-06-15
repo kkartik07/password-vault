@@ -5,14 +5,13 @@ const Home = () => {
 
   const handleLogin = () => {
     navigate('/login')
-    // You'll update this function later
   }
 
   
   return (
     <div className="wc-container">
-        <div>
-
+      <div>
+      <img src={'/bg.png'} width={400} style={{marginTop:'-40px'}}/>
       <div className='title-container'>
         <div>Welcome.</div>
       </div>
@@ -22,8 +21,7 @@ const Home = () => {
           type="button"
           onClick={handleLogin}
           >Login</button>
-      <div>Don not have an account ? <Link to="/signup">Register</Link></div>
-
+        <div>Do not have an account ? <Link to="/signup">Register</Link></div>
           </div>
 
     </div>
