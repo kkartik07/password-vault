@@ -5,8 +5,12 @@ import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import { generateRandomPassword } from "../utils/password-generate";
 
+import { editAccounts } from "../redux/accountsSlice";
+import { useDispatch } from "react-redux";
 
-function EditModal({handleEditToggler,details,setAccounts}) {
+function EditModal({handleEditToggler,details}) {
+
+  const dispatch=useDispatch()
     const [name,setName]=useState(details.name);
     const [email,setEmail]=useState(details.email);
     const [password,setPassword]=useState(details.password);
@@ -25,7 +29,7 @@ function EditModal({handleEditToggler,details,setAccounts}) {
         const userid=localStorage.getItem('user-id')
         const token=localStorage.getItem('token')
         const accounts=await axios.put(`https://password-vault-backend.onrender.com/${userid}/edit-account/${details.acc_id}`,{accountName:name,accountPassword:password,accountEmail:email},{headers:{token,userid}});
-        setAccounts(accounts.data);
+        dispatch(editAccounts(accounts.data));
         const notify = () => toast("Account edited successfully");
         notify()
         }catch(err){

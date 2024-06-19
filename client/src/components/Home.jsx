@@ -8,12 +8,17 @@ import { useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
 import { ShimmerThumbnail } from "react-shimmer-effects";
 
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setAccounts } from "../redux/accountsSlice";
+
 
 function Home() {
     const [canCreate, setCanCreate] = useState(false);
-    const [accounts, setAccounts] = useState([
-        // use shimmer ui instead
-    ]);
+
+    //redux part
+    const accounts=useSelector(state=>state.accounts.acc)
+    const dispatch=useDispatch();
     const [isLoading,setLoading]=useState(false);
 
     const [searchQuery, setSearchQuery] = useState("");
@@ -26,7 +31,7 @@ function Home() {
                 const token=localStorage.getItem('token');
                 const userID=localStorage.getItem('user-id');
                 const res = await axios.get(`https://password-vault-backend.onrender.com/${userID}/accounts`,{headers:{token,userID}});
-                setAccounts(res.data);
+                dispatch(setAccounts(res.data))
             } catch (err) {
                 console.error(err); // Handle errors
                 const notify = () => toast("Session expired. Login Again");
@@ -47,7 +52,7 @@ function Home() {
         setCanCreate(canCreate => !canCreate);
     };
     
-    const filteredAccounts = accounts.filter(account =>
+    const filteredAccounts = accounts?.filter(account =>
         account.accountName.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
@@ -63,8 +68,8 @@ function Home() {
             </div>
             {!isLoading &&
                 <div className="cards">
-                    {filteredAccounts.map(account => (
-                        <AccountCard account={account} key={account._id} setAccounts={setAccounts}/>
+                    {filteredAccounts?.map(account => (
+                        <AccountCard account={account} key={account._id}/>
                     ))}
                 </div>
             } 
@@ -80,7 +85,7 @@ function Home() {
                     
                 </div>
             }
-            {canCreate && <CreateModal handleCreateToggler={handleCreateToggler} setAccounts={setAccounts}/>}
+            {canCreate && <CreateModal handleCreateToggler={handleCreateToggler}/>}
             <Toaster 
         toastOptions={{
             style: {

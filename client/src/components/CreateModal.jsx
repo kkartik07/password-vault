@@ -5,13 +5,16 @@ import { generateRandomPassword } from "../utils/password-generate";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 
+import { useDispatch } from "react-redux";
+import { addAccounts } from "../redux/accountsSlice";
 
 
-function CreateModal({handleCreateToggler,setAccounts}) {
+
+function CreateModal({handleCreateToggler}) {
   const [name,setName]=useState("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
-  
+  const dispatch=useDispatch();
   const handleClose=()=>{
     handleCreateToggler();
   }
@@ -21,7 +24,7 @@ function CreateModal({handleCreateToggler,setAccounts}) {
         const userid=localStorage.getItem('user-id')
         const token=localStorage.getItem('token')
         const accounts=await axios.post(`https://password-vault-backend.onrender.com/${userid}/new-account`,{accountName:name,accountPassword:password,accountEmail:email},{headers:{token,userid}});
-        setAccounts(accounts.data);
+        dispatch(addAccounts(accounts.data));
         const notify = () => toast("Account added successfully");
         notify()
       }catch(err){

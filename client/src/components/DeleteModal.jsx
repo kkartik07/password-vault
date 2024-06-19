@@ -1,7 +1,11 @@
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 
-function DeleteModal({handleDeleteToggler,setAccounts,accountID}) {
+import { useDispatch } from "react-redux";
+import { removeAccounts } from "../redux/accountsSlice";
+
+function DeleteModal({handleDeleteToggler,accountID}) {
+  const dispatch=useDispatch();
 
   const handleClose=()=>{
     handleDeleteToggler();
@@ -12,7 +16,7 @@ function DeleteModal({handleDeleteToggler,setAccounts,accountID}) {
       const userid=localStorage.getItem('user-id')
       const token=localStorage.getItem('token')
       const accounts=await axios.delete(`https://password-vault-backend.onrender.com/${userid}/delete-account/${accountID}`,{headers:{token,userid}});
-      setAccounts(accounts.data);
+      dispatch(removeAccounts(accounts.data));
       const notify = () => toast("Account deleted successfully");
       notify()
     }catch(err){
