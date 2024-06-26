@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
+import FlipText from "./magicui/flip-text";
 
 const Home = () => {
   const navigate = useNavigate()
@@ -11,11 +12,14 @@ const Home = () => {
   return (
     <div className="wc-container">
       <div>
-      <img src={'/bg.png'} width={400} style={{marginTop:'-40px'}}/>
+      <img src={'/bg.png'} width={400} style={{marginTop:'-40px',marginLeft:"auto",marginRight:"auto"}}/>
       <div className='title-container'>
         <div>Welcome.</div>
       </div>
-      <div>The only password manager you need !</div>
+      <FlipText
+      className="flip-text"
+      word="The only password manager you need !"
+    />
         <button
           className='input-button'
           type="button"
@@ -23,7 +27,6 @@ const Home = () => {
           >Login</button>
         <div>Do not have an account ? <Link to="/signup">Register</Link></div>
           </div>
-
     </div>
   )
 }
